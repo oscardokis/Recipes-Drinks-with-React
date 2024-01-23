@@ -1,0 +1,32 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  height: 100%;
+  width: 100%;
+  box-sizing: border-box;
+  margin: 0 auto;
+  background-image: linear-gradient(rgba(0, 0, 0, 0.5),rgba(0, 0, 0, 0.5)),url(./assets/food-imagen.jpg);
+  background-position: center;
+  background-size:cover; 
+  
+}
+.text-shadow{
+  text-shadow: 8px 8px 8px rgb(0, 0, 0);
+}
+:root {
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial;
+  height: 100%;
+  width: 100%;
+  
+}
+#root {
+  height: 100%;
+  width: 100%;
+}
+.divCard{
+  background-color: #282c34;
+  background: linear-gradient(0deg, rgba(40,44,52,1) 0%, rgba(17,0,32,.5) 100%);
+  /* box-shadow: 0 7px 20px 5px #00000088; */
+}
