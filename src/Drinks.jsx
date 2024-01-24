@@ -7,7 +7,6 @@ export function Drinks(){
     const [url, setUrl] = useState("https://www.thecocktaildb.com/api/json/v1/1/search.php?s=margarita");
     const { data } = useData({ url });
     const [ drinks, setDrinks ] = useLocalStorage("drinks", []);
-    const dataFilter = data.drinks?.filter(dataElem => !drinks?.some(cardStorage => dataElem.idDrink === cardStorage.id));
     return (
       <section className='text-white pb-10 mt-20 sm:mt-20'>
         <label className="mb-4 flex flex-col sm:flex-row items-center justify-center content-center flex-wrap gap-6 px-4 w-full sm:px-8 h-auto sm:h-20">
@@ -31,7 +30,7 @@ export function Drinks(){
         </label>
   
         <div className='sm:m-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-10 justify-evenly justify-items-center content-evenly'>
-          {dataFilter?.map((drink, index) => (
+          {data.drinks?.map((drink, index) => (
             <CardDrink 
             title={drink.strDrink} 
             id={drink.idDrink}

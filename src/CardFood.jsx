@@ -1,7 +1,8 @@
 export function CardFood({title, image, strCategory, originCountry, id, foods, setFoods, instructions, buttonToggle}){
   const handleSave = () => {
     const newCards = [...foods]
-    newCards.push({title, image, strCategory, instructions, id})
+    const checkRepeat = newCards.some(obj => obj.id === id);
+    if(!checkRepeat) newCards.push({title, image, strCategory, instructions, id});
     setFoods(newCards);
   }
   const handleDelete = () => {
