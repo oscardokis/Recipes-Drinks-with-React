@@ -60,7 +60,7 @@ function App() {
     ) }
     {activeModal && (
       <Modal>
-        <div id="modalContainer" className='bg-slate-800 relative flex flex-col w-11/12 xl:w-8/12 lg:max-w-5xl h-5/6 sm:h-auto gap-12 justify-start items-center p-2 sm:py-4 rounded-2xl'>
+        <div id="modalContainer" className='bg-zinc-500/60 backdrop-blur-sm relative flex flex-col w-11/12 xl:w-8/12 lg:max-w-5xl h-5/6 sm:h-auto gap-12 justify-start items-center p-2 sm:py-4 rounded-2xl'>
           <h2 className='text-white text-4xl text-shadow text-center border-t border-b py-4 w-full'>Random Meal</h2>
           <button onClick={() => setActiveModal(false)} className='text-3xl absolute top-6 sm:top-8 right-4 text-white flex h-auto w-auto'>x</button>
           <div className='flex text-white justify-center gap-10 flex-wrap overflow-y-auto sm:overflow-y-none'>
@@ -70,8 +70,9 @@ function App() {
         </div>
       </Modal>
     )}
-    {activeButtons === "Foods" && <Foods/> }
-    {activeButtons === "Drinks" && <Drinks/> }
+        
+    {activeButtons === "Foods" && <Foods href="#" /> }
+    {activeButtons === "Drinks" && <Drinks href="#"/> }
     {activeButtons === "Saved" && <Saved/> }
     </>
   )
