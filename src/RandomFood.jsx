@@ -1,26 +1,24 @@
 import { useData } from "./Hooks/useData"
 import { CardFood } from "./CardFood"
-import { useState } from "react";
+import { useLocalStorage } from "./Hooks/useLocalStorage";
 export function RandomFood(){
-    const { data } =useData({url:"https://api.spoonacular.com/recipes/random?number=1&apiKey=a8055933c3944cae960ccc046b376ba6"});
-    const [cards, setCards] = useState(() => {
-        const cardsFromStorage = window.localStorage.getItem("foods");
-        return cardsFromStorage ? JSON.parse(cardsFromStorage): []
-      });
+    const { data } =useData({url:"https://www.themealdb.com/api/json/v1/1/random.php"});
+    const [ foods, setFoods ] = useLocalStorage("foods", []);
     return(
         <>
-        {data.recipes?.map((food,idx) => 
-            (<CardFood 
-                title={food.title}  
-                key={idx+1000}
-                id={food.id}
-                image={food.image}  
-                ingredients={food.extendedIngredients}  
-                vegetarian={food.vegetarian}  
-                readyInMinutes={food.readyInMinutes}
-                cards={cards}
-                setCards={setCards}
-                
+        {data.meals?.map((food,idx) => 
+            (
+            <CardFood 
+                title={food.strMeal}  
+                key={idx}
+                id={food.idMeal}
+                image={food.strMealThumb}  
+                strCategory={food.strCategory}  
+                originCountry={food.strArea}
+                instructions={food.strInstructions}
+                foods ={foods}
+                setFoods={setFoods}
+                buttonToggle={true}
             />
             ))
         }

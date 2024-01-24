@@ -1,43 +1,39 @@
-import { useState } from "react";
-import { CardSavedDrink } from "./CardSavedDrink";
-import { CardSavedFood } from "./CardSavedFood";
+import { useLocalStorage } from "./Hooks/useLocalStorage";
+import { CardDrink } from "./CardDrink";
+import { CardFood } from "./CardFood";
 export function Saved(){
-    const [cardsStorage, setCardsStorage] = useState(() => {
-      const cardsFromStorage = window.localStorage.getItem("drinks");
-      return cardsFromStorage ? JSON.parse(cardsFromStorage): []
-    });
-    const handlerStorage = (data) => setCardsStorage(data);
-    const [cardsStorageFood, setCardsStorageFood] = useState(() => {
-      const cardsFromStorage = window.localStorage.getItem("foods");
-      return cardsFromStorage ? JSON.parse(cardsFromStorage): []
-    });
-    const handlerStorageFood = (data) => setCardsStorageFood(data); 
+    const [ drinks, setDrinks] = useLocalStorage("drinks", []);
+    const [ foods, setFoods] = useLocalStorage("foods", []);
     return (
-      <section className='text-white pb-10 mt-20 sm:mt-20'>
+      <section className='text-white flex justify-center pt-20'>
+      {(drinks.length === 0 && foods.length === 0) && (<div className="text-4xl sm:text-5xl font-semibold text-white text-shadow text-center h-auto w-auto absolute top-96 sm:top-96"><span>Your Saved Recipes Will Appear Here</span></div>)}
       <div className='sm:m-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-10 justify-evenly justify-items-center content-evenly'>
-        {cardsStorage?.map((drink, index) => (
-          <CardSavedDrink 
-          title={drink.title}  
+        {drinks?.map((drink, index) => (
+          <CardDrink 
+          title={drink.title} 
+          id={drink.id}
           key={index}
           image={drink.image}  
           type={drink.type}  
           instrucctions={drink.instrucctions}  
-          ingredient={drink.ingredient}
-          cardsStorage = { cardsStorage }
-          handlerStorage = { handlerStorage }
+          ingredient={drink.ingredient}  
+          buttonToggle = {false}
+          drinks={drinks}
+          setDrinks={setDrinks}
           />
         ))}
-        {cardsStorageFood?.map((food, index) => (
-          <CardSavedFood
+        {foods?.map((food, index) => (
+          <CardFood 
           title={food.title}  
           key={index}
           id={food.id}
           image={food.image}  
-          ingredients={food.ingredients}  
-          vegetarian={food.vegetarian}  
-          readyInMinutes={food.readyInMinutes}  
-          cardsStorageFood = { cardsStorageFood }
-          handlerStorageFood = { handlerStorageFood }
+          strCategory={food.strCategory}  
+          originCountry={food.originCountry}
+          instructions={food.instructions}
+          buttonToggle = {false}
+          foods ={foods}
+          setFoods={setFoods}
           />
         ))}
       </div>

@@ -1,15 +1,13 @@
 import { useState } from "react";
 import { useData } from "./Hooks/useData";
+import { useLocalStorage } from "./Hooks/useLocalStorage";
 import { CardDrink } from "./CardDrink";
 export function Drinks(){
     const [query, Setquery] = useState("");
     const [url, setUrl] = useState("https://www.thecocktaildb.com/api/json/v1/1/search.php?s=margarita");
     const { data } = useData({ url });
-    const [cards, setCards] = useState(() => {
-      const cardsFromStorage = window.localStorage.getItem("drinks");
-      return cardsFromStorage ? JSON.parse(cardsFromStorage): []
-    });
-    const dataFilter = data.drinks?.filter(dataElem => !cards.some(cardStorage => dataElem.idDrink === cardStorage.id));
+    const [ drinks, setDrinks ] = useLocalStorage("drinks", []);
+    const dataFilter = data.drinks?.filter(dataElem => !drinks?.some(cardStorage => dataElem.idDrink === cardStorage.id));
     return (
       <section className='text-white pb-10 mt-20 sm:mt-20'>
         <label className="mb-4 flex flex-col sm:flex-row items-center justify-center content-center flex-wrap gap-6 px-4 w-full sm:px-8 h-auto sm:h-20">
@@ -38,12 +36,13 @@ export function Drinks(){
             title={drink.strDrink} 
             id={drink.idDrink}
             key={index}
-            cards={cards}
             image={drink.strDrinkThumb}  
             type={drink.strAlcoholic}  
             instrucctions={drink.strInstructions}  
             ingredient={drink.strIngredient1}  
-            setCards={setCards}
+            buttonToggle = {true}
+            drinks={drinks}
+            setDrinks={setDrinks}
             />
           ))}
         </div>
