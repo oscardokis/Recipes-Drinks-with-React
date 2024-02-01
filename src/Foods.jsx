@@ -11,7 +11,7 @@ export function Foods(){
     return (
       <section className='text-white pb-10 mt-20 sm:mt-20'>
         <label className="mb-4 flex flex-col sm:flex-row items-center justify-center content-center flex-wrap gap-6 px-4 w-full sm:px-8 h-auto sm:h-20">
-          <p className="text-shadow text-2xl sm:text-3xl text-center w-auto sm:w-6/12">What kind/type of drink would you like to search for: </p>
+          <p className="text-shadow text-2xl sm:text-3xl text-center w-auto sm:w-6/12">What kind/type of Food would you like to search for: </p>
           <input 
           className="pl-6 text-xl text-black rounded-md w-auto sm:w-3/12 h-10 sm:h-10"
           type="text"
